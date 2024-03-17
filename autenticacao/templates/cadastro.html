@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'autenticacao/css/cadastro.css' %}">
+{% endblock %}
+
+{% block 'title' %}Cadastro{% endblock 'title' %}
+
+{% block 'body' %}
+
+    <div class="box text-dark">
+        <form action="{% url 'cadastro' %}" method="POST">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {{message.tags}} mt-3">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% csrf_token %}
+            <h1 class="titulo font-degrade borda-bottom-degrade">INSCREVA-SE</h2>
+            <br>
+            <div class="form-floating mb-3">
+                <input name="username" class="form-control" type="text" id="txtUsername" placeholder=" " />
+                <label for="txtUsername">Usuário</label>
+            </div>
+            <br>
+            <div class="form-floating mb-3">
+                <input name="password" class="form-control" type="password" id="txtPassword" placeholder=" " />
+                <label for="txtPassword">Senha</label>
+            </div>
+            <br>
+            <div class="form-floating mb-3">
+                <input name="confirm_password" class="form-control" type="password" id="txtConfirmPassword" placeholder=" " />
+                <label for="txtConfirmPassword">Confirma Senha</label>
+            </div>
+            <br>
+            <input type="submit" value="CADASTRAR" class="btn btn-success btn-lg me-3">
+            <a href="{% url 'logar' %}" class="btn btn-primary btn-lg">LOGIN</a>
+        </form>
+    </div>
+
+{% endblock %}
